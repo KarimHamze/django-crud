@@ -8,16 +8,21 @@
   <header>
     <nav>
       <ul>
-        <li><a href="/">HOME</a></li>
-      </ul>
-      <ul>
-        <li><a href="/tasks">TASK</a></li>
-      </ul>
-      <ul>
-        <li><a href="/signup">SIGN UP</a></li>
-      </ul>
-      <ul>
-        <li><a href="">LOG IN</a></li>
+        <li>
+          <a href="/">HOME</a>
+        </li>
+        <li>
+          <a href="/tasks">TASK</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li>
+          <a href="/logout">LOG OUT</a>
+        </li>
+        {% else %}
+        <li>
+          <a href="/signup">SIGN UP</a>
+        </li>
+        {% endif %}
       </ul>
     </nav>
   </header>
