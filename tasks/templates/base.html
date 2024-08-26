@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Django CRUD app</title>
+  </head>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">HOME</a></li>
+      </ul>
+      <ul>
+        <li><a href="/tasks">TASK</a></li>
+      </ul>
+      <ul>
+        <li><a href="/signup">SIGN UP</a></li>
+      </ul>
+      <ul>
+        <li><a href="">LOG IN</a></li>
+      </ul>
+    </nav>
+  </header>
+  <body>
+    {% block content %} {% endblock %}
+  </body>
+</html>
