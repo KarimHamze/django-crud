@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+<!-- CONTENT -->
+{% block content %}
+<button><a href="/tasks/">Back</a></button>
+<h1>Task Detail</h1>
+<p>Title: {{task.title}}</p>
+<p>Description: {{task.description}}</p>
+{% endblock %}

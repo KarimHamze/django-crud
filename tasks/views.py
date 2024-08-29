@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
@@ -45,6 +45,31 @@ def tasks(request):
         'tasks' : tasks
     })
 
+#CREATE TASK
+def create_task(request):
+    
+    if request.method == 'GET':
+        return render(request, 'create_task.html', {
+            'form' : TaskForm
+        })
+    else:
+        try:
+            form = TaskForm(request.POST)
+            new_task = form.save(commit=False)
+            new_task.user = request.user
+            new_task.save()
+            return redirect('tasks')
+        except ValueError:
+            return render(request, 'create_task.html', {
+            'form' : TaskForm,
+            'error': 'Please provide valide data'
+        })
+
+#TASK DETAILS
+def task_detail(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+    return render(request, 'task_detail.html', {'task': task})
+
 #LOG OUT
 def signout(request):
     logout(request)
@@ -66,23 +91,3 @@ def signin(request):
         else:
             login(request, user)
             return redirect('tasks')
-        
-#CREATE TASK
-def create_task(request):
-    
-    if request.method == 'GET':
-        return render(request, 'create_task.html', {
-            'form' : TaskForm
-        })
-    else:
-        try:
-            form = TaskForm(request.POST)
-            new_task = form.save(commit=False)
-            new_task.user = request.user
-            new_task.save()
-            return redirect('tasks')
-        except ValueError:
-            return render(request, 'create_task.html', {
-            'form' : TaskForm,
-            'error': 'Please provide valide data'
-        })
