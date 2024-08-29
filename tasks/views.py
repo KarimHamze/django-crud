@@ -97,6 +97,13 @@ def delete_task(request, task_id):
         task.delete()
         return redirect('tasks')
 
+#TASKS COMPLETEDS
+def tasks_completed(request):
+    tasks = Task.objects.filter(user=request.user, datecompleted__isnull=False).order_by('-datecompleted') 
+    return render(request, 'tasks_completed.html', {
+        'tasks' : tasks
+    })
+
 
 #LOG OUT
 def signout(request):
