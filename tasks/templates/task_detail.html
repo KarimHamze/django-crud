@@ -4,6 +4,20 @@
 {% block content %}
 <button><a href="/tasks/">Back</a></button>
 <h1>Task Detail</h1>
-<p>Title: {{task.title}}</p>
-<p>Description: {{task.description}}</p>
+<p>{{error}}</p>
+
+<form method="POST">
+  {% csrf_token %} {{form.as_p}}
+  <button>Update</button>
+</form>
+
+<form action="{% url 'completed_task' task.id %}" method="POST">
+  {% csrf_token %}
+  <button>Completed</button>
+</form>
+
+<form action="{% url 'completed_task' task.id %}" method="POST">
+  {% csrf_token %}
+  <button>Delete</button>
+</form>
 {% endblock %}
