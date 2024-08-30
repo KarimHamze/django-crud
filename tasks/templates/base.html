@@ -3,39 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../templates/scripts/style.css" />
     <title>Django CRUD app</title>
+    <link
+      rel="stylesheet"
+      href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
   </head>
   <header>
-    <nav>
-      <ul>
-        <li>
-          <a href="/">HOME</a>
-        </li>
-        <li>
-          <a href="{% url 'tasks' %}">TASK</a>
-        </li>
-        <li>
-          <a href="{% url 'create_task' %}">CREATE TASK</a>
-        </li>
-        {% if user.is_authenticated %}
-        <li>
-          <a href="/tasks_completed/">TASKS COMPLETED</a>
-        </li>
-        <li>
-          <a href="/logout">LOG OUT</a>
-        </li>
-        <li>Bienvenido, {{ user.username }}</li>
-        {% else %}
-        <li>
-          <a href="/signup">SIGN UP</a>
-        </li>
-        <li>
-          <a href="/signin">LOG IN</a>
-        </li>
-        {% endif %}
-      </ul>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item" >
+              <a class="nav-link" href="/">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'tasks' %}">TASK</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'create_task' %}">CREATE TASK</a>
+            </li class="nav-item">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'tasks_completed' %}">TASKS COMPLETED</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">LOG OUT</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'signup' %}">SIGN UP</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'signin' %}">LOG IN</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
     </nav>
+    {% if user.is_authenticated %}
+    <h1 class="text-center">Bienvenid@ {{ user.username }}</h1>
+    {% endif %}
   </header>
   <body>
     {% block content %} {% endblock %}

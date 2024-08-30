@@ -2,13 +2,28 @@
 
 <!-- CONTENT -->
 {% block content %}
-<h1>home</h1>
-<p>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, alias
-  excepturi consequuntur architecto inventore saepe, delectus repellendus omnis
-  magni eaque et suscipit est recusandae iusto exercitationem, a maiores
-  eveniet. Tenetur quisquam reprehenderit, perferendis vitae consectetur
-  accusamus distinctio quas autem exercitationem deserunt quod dolores minima,
-  itaque eligendi sed perspiciatis commodi! Veniam?
-</p>
+<main class="container py-5">
+  <section class="card card-body">
+    <h1 class="display-1 text-center">Django App</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, alias
+      excepturi consequuntur architecto inventore saepe, delectus repellendus
+      omnis magni eaque et suscipit est recusandae iusto exercitationem, a
+      maiores eveniet. Tenetur quisquam reprehenderit, perferendis vitae
+      consectetur accusamus distinctio quas autem exercitationem deserunt quod
+      dolores minima, itaque eligendi sed perspiciatis commodi! Veniam?
+    </p>
+    {% if user.is_authenticated %}
+    <div class="text-center">
+      <a class="btn btn-secondary" href="/tasks/">Tasks</a>
+      <a class="btn btn-dark" href="/tasks/create/">Create Task</a>
+    </div>
+    {% else %}
+    <div class="text-center">
+      <a class="btn btn-secondary" href="/signin/">Sign in</a>
+      <a class="btn btn-dark" href="/signup/">Sign up</a>
+    </div>
+    {% endif %}
+  </section>
+</main>
 {% endblock %}
